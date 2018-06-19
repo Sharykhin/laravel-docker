@@ -1,7 +1,7 @@
 os: linux
 language: php
 php:
-  - 7.2.6
+  - 7.2
 services:
 - docker
 before_script:
@@ -9,7 +9,7 @@ before_script:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   ## PHP Copy/Paste Detector
-  - curl -o phpcpd.phar https://phar.phpunit.de/phpcpd.phar
+  - wget https://phar.phpunit.de/phpcpd.phar
   ## PHP Mess Detector
   - pear config-set preferred_state beta
   - printf "\n" | pecl install imagick
@@ -37,9 +37,15 @@ script:
   - phpunit .
   ## LINT
 #  - find ./ -type f -name \*.php -exec php -l {} \;
-  ## TEST PHPMD
+
   - bash ./.deployment/travis-ci/phpmd
+  - bash ./.deployment/travis-ci/phploc
+  - bash ./.deployment/travis-ci/phpcpd
 
 notifications:
   email:
-    chapal@inbox.ru
+    recipients:
+      - chapal@inbox.ru
+      - siarhei.sharykhin@itechart-group.com
+    on_success: never # default: change
+    on_failure: always # default: always
