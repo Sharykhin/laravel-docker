@@ -1,0 +1,55 @@
+version: "3"
+
+networks:
+  laravel:
+    external: true
+
+volumes:
+  db-data:
+  db-logs:
+
+services:
+  laravel-php:
+    container_name: laravel-php
+    image: laravel-php
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    volumes:
+      - .:/var/www
+    networks:
+      - laravel
+  laravel-nginx:
+      container_name: laravel-nginx
+      image: laravel-nginx
+      build:
+        context: .
+        dockerfile: .docker/nginx/Dockerfile
+      volumes:
+        - .:/var/www
+      links:
+        - laravel-php
+      depends_on:
+        - laravel-php
+      ports:
+        - 8000:80
+        - 447:443
+      networks:
+        - laravel
+  laravel-mysql:
+      container_name: laravel-mysql
+      image: laravel-mysql
+      build:
+        context: .
+        dockerfile: .docker/mysql/Dockerfile
+      volumes:
+        - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+        - db-data:/var/lib/mysql
+        - db-logs:/var/log/mysql
+      ports:
+        - 33006:3306
+      env_file:
+        - ./.docker/mysql/.env
+      networks:
+        - laravel
+
