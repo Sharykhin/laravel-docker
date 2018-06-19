@@ -8,8 +8,7 @@ namespace App\Http\Controllers;
  */
 class TestController extends Controller
 {
-    public function index()
-    {
+    public function index()    {
         $i= 10;
         $b = 20;
 
