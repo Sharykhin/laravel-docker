@@ -1,3 +1,8 @@
 #!/bin/bash
 docker pull denisura/phpmd
-docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text cleancode,codesize,controversial,design,naming,unusedcode
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text cleancode
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text codesize
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text controversial
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text design
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text naming
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text unusedcode

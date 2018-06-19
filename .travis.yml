@@ -11,30 +11,33 @@ before_script:
   ## PHP Copy/Paste Detector
   - wget https://phar.phpunit.de/phpcpd.phar
   ## PHP Mess Detector
-  - pear config-set preferred_state beta
-  - printf "\n" | pecl install imagick
-  - pear channel-discover pear.phpmd.org
-  - pear channel-discover pear.pdepend.org
-  - pear install --alldeps phpmd/PHP_PMD
-  - phpenv rehash
+#  - pear config-set preferred_state beta
+#  - printf "\n" | pecl install imagick
+#  - pear channel-discover pear.phpmd.org
+#  - pear channel-discover pear.pdepend.org
+#  - pear install --alldeps phpmd/PHP_PMD
+  - wget -c http://static.phpmd.org/php/latest/phpmd.phar
+#  - phpenv rehash
   ## PHPLOC
-  - curl -o phploc.phar https://phar.phpunit.de/phploc.phar
+#  - curl -o phploc.phar https://phar.phpunit.de/phploc.phar
+  - wget https://phar.phpunit.de/phploc.phar
 script:
   ## PHP_CodeSniffer
   - phpcs --report=emacs --standard=PSR2 app/Http/Controllers/TestController.php --ignore=vendor/*
   ## PHP Copy/Paste Detector
   - php phpcpd.phar --verbose app/Http/Controllers/TestController.php
   ## PHP Mess Detector
-  - phpmd app/Http/Controllers/TestController.php text cleancode --exclude vendor
-  - phpmd app/Http/Controllers/TestController.php text codesize --exclude vendor
-  - phpmd app/Http/Controllers/TestController.php text controversial --exclude vendor
-  - phpmd app/Http/Controllers/TestController.php text design --exclude vendor
-  - phpmd app/Http/Controllers/TestController.php text naming --exclude vendor
-  - phpmd app/Http/Controllers/TestController.php text unusedcode --exclude vendor
+  - php phpmd.phar app/Http/Controllers/TestController.php text cleancode --exclude vendor
+  #- phpmd app/Http/Controllers/TestController.php text cleancode --exclude vendor
+  #- phpmd app/Http/Controllers/TestController.php text codesize --exclude vendor
+  #- phpmd app/Http/Controllers/TestController.php text controversial --exclude vendor
+  #- phpmd app/Http/Controllers/TestController.php text design --exclude vendor
+  #- phpmd app/Http/Controllers/TestController.php text naming --exclude vendor
+  #- phpmd app/Http/Controllers/TestController.php text unusedcode --exclude vendor
   ## PHPLOC
   - php phploc.phar app/Http/Controllers/TestController.php --exclude vendor
   ## PHPUNIT
-  - phpunit .
+  #- phpunit .
   ## LINT
 #  - find ./ -type f -name \*.php -exec php -l {} \;
 
