@@ -1,0 +1,32 @@
+#!/bin/bash
+
+docker network create test
+
+docker build -t test-php . --build-arg INSTALL_XDEBUG=false --build-arg INSTALL_OPCACHE=false --file=.docker/php/Dockerfile
+docker build -t test-nginx . --file=.docker/nginx/Dockerfile
+docker build -t test-mysql  . --file=.docker/mysql/Dockerfile
+
+docker run --name test-mysql  --net test -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=test -d -t test-mysql
+#This is temporary fix. We need to move to a docker-compose
+sleep 5
+docekr run --name test-php --env DB_HOST=test-mysql -d -t test-php
+sleep 5
+docekr run --name test-nginx -d -t test-nginx
+sleep 5
+docker exec -it test-php composer install
+docker exec -it test-php cp .env.example .env
+docker exec -it test-php php artisan key:generate
+docker exec -it test-php php artisan migrate
+docker exec -it test-php php artisan migrate:rollback
+docker exec -it test-php php artisan migrate:fresh
+
+docker stop test-nginx
+docker stop test-php
+docker stop test-mysql
+docker rm test-nginx
+docker rm test-php
+docker rm test-mysql
+docker rmi test-mysql
+docker rmi test-nginx
+docker rmi test-php
+docker network rm test

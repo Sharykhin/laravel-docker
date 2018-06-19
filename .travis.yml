@@ -32,7 +32,7 @@ script:
   #- phpunit .
   ## LINT
   - find ./app/Http/Controllers/TestController.php -type f -name \*.php -exec php -l {} \;
-
+  - bash ./.deployment/travis-ci/migration
 #  - bash ./.deployment/travis-ci/phpmd
 #  - bash ./.deployment/travis-ci/phploc
 #  - bash ./.deployment/travis-ci/phpcpd
@@ -44,4 +44,4 @@ notifications:
       - chapal@inbox.ru
       - siarhei.sharykhin@itechart-group.com
     on_success: never # default: change
-    on_failure: always # default: always
+    on_failure: never # default: always
