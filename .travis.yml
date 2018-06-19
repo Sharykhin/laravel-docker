@@ -11,15 +11,8 @@ before_script:
   ## PHP Copy/Paste Detector
   - wget https://phar.phpunit.de/phpcpd.phar
   ## PHP Mess Detector
-#  - pear config-set preferred_state beta
-#  - printf "\n" | pecl install imagick
-#  - pear channel-discover pear.phpmd.org
-#  - pear channel-discover pear.pdepend.org
-#  - pear install --alldeps phpmd/PHP_PMD
   - wget -c http://static.phpmd.org/php/latest/phpmd.phar
-#  - phpenv rehash
   ## PHPLOC
-#  - curl -o phploc.phar https://phar.phpunit.de/phploc.phar
   - wget https://phar.phpunit.de/phploc.phar
 script:
   ## PHP_CodeSniffer
@@ -28,22 +21,22 @@ script:
   - php phpcpd.phar --verbose app/Http/Controllers/TestController.php
   ## PHP Mess Detector
   - php phpmd.phar app/Http/Controllers/TestController.php text cleancode --exclude vendor
-  #- phpmd app/Http/Controllers/TestController.php text cleancode --exclude vendor
-  #- phpmd app/Http/Controllers/TestController.php text codesize --exclude vendor
-  #- phpmd app/Http/Controllers/TestController.php text controversial --exclude vendor
-  #- phpmd app/Http/Controllers/TestController.php text design --exclude vendor
-  #- phpmd app/Http/Controllers/TestController.php text naming --exclude vendor
-  #- phpmd app/Http/Controllers/TestController.php text unusedcode --exclude vendor
+  - php phpmd.phar app/Http/Controllers/TestController.php text codesize --exclude vendor
+  - php phpmd.phar app/Http/Controllers/TestController.php text controversial --exclude vendor
+  - php phpmd.phar app/Http/Controllers/TestController.php text design --exclude vendor
+  - php phpmd.phar app/Http/Controllers/TestController.php text naming --exclude vendor
+  - php phpmd.phar app/Http/Controllers/TestController.php text unusedcode --exclude vendor
   ## PHPLOC
   - php phploc.phar app/Http/Controllers/TestController.php --exclude vendor
   ## PHPUNIT
   #- phpunit .
   ## LINT
-#  - find ./ -type f -name \*.php -exec php -l {} \;
+  - find ./app/Http/Controllers/TestController.php -type f -name \*.php -exec php -l {} \;
 
-  - bash ./.deployment/travis-ci/phpmd
-  - bash ./.deployment/travis-ci/phploc
-  - bash ./.deployment/travis-ci/phpcpd
+#  - bash ./.deployment/travis-ci/phpmd
+#  - bash ./.deployment/travis-ci/phploc
+#  - bash ./.deployment/travis-ci/phpcpd
+#  - bash ./.deployment/travis-ci/phpcs
 
 notifications:
   email:
