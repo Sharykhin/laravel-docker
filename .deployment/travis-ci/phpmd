@@ -1,0 +1,3 @@
+#!/bin/bash
+docker pull denisura/phpmd
+docker run --rm -it -v $(pwd):/workspace denisura/phpmd app/Http/Controllers/TestController.php text cleancode,codesize,controversial,design,naming,unusedcode

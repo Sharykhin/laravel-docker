@@ -11,6 +11,7 @@ class TestController extends Controller
     public function index()
     {
         $i= 10;
-        echo $i;
+        $b = 20;
+        echo "12";
     }
 }
