@@ -15,8 +15,8 @@ services:
     build:
       context: .
       dockerfile: .docker/php/Dockerfile
-    env_file:
-      - .docker/php/.env
+    #env_file:
+    #  - .docker/php/.env
     depends_on:
       - laravel-mysql
     volumes:

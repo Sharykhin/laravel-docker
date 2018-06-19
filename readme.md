@@ -42,3 +42,7 @@ docker-compose exec laravel-php php artisan key:generate
 ```bash
 docker-compose exec laravel-php php artisan serve
 ```
+
+#### Debugging:
+Use the following to enable debugger on mac: [Debug on Mac](./xdebug_on_mac.md)  
+For Ubuntu try use this article: [Debug in Docker](https://blog.philipphauer.de/debug-php-docker-container-idea-phpstorm/)
