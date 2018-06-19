@@ -20,20 +20,25 @@ cp .env.example .env
 cp .docker/mysql/.env.example .docker/mysql/.env
 ```
 
-4. Fill appropriate data into `.docker/mysql/.env` and `.env`
+4. Make copy of php docker .env.example to .env:
+```bash
+cp .docker/php/.env.example .docker/php/.env
+```
+
+5. Fill appropriate data into `.docker/mysql/.env` and `.env`
 By default it uses `laravel` for user, password and database.
 
-5. Install php dependencies:
+6. Install php dependencies:
 ```bash
 docker-compose exec laravel-php composer install
 ```
 
-6. Generate application key:
+7. Generate application key:
 ```bash
 docker-compose exec laravel-php php artisan key:generate
 ```
 
-7. Run server:
+8. Run server:
 ```bash
 docker-compose exec laravel-php php artisan serve
 ```
