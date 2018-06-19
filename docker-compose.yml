@@ -15,8 +15,9 @@ services:
     build:
       context: .
       dockerfile: .docker/php/Dockerfile
-    #env_file:
-    #  - .docker/php/.env
+      args:
+        INSTALL_XDEBUG: "true"
+        INSTALL_OPCACHE: "false"
     depends_on:
       - laravel-mysql
     volumes:
