@@ -37,8 +37,9 @@ script:
   - phpunit .
   ## LINT
 #  - find ./ -type f -name \*.php -exec php -l {} \;
-script:
-- bash ./.deployment/travis/phpmd
+  ## TEST PHPMD
+  - bash ./.deployment/travis-ci/phpmd
+
 notifications:
   email:
     chapal@inbox.ru
