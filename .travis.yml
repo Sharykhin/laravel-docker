@@ -1,5 +1,9 @@
 os: linux
 language: php
+sudo: false
+cache:
+  directories:
+        - $HOME/.composer/cache
 php:
   - 7.2
 services:
