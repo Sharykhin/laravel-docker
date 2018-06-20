@@ -1,11 +1,10 @@
 os: linux
 language: php
-sudo: false
-cache:
-  apt: true
-  directories:
-    - vendor
-    - $HOME/.composer/cache
+#cache:
+#  apt: true
+#  directories:
+#    - vendor
+#    - $HOME/.composer/cache
 php:
   - 7.2
 services:

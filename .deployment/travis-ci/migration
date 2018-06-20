@@ -13,6 +13,7 @@ docker run --name test-php --net test -v $TRAVIS_BUILD_DIR:/var/www --env DB_HOS
 sleep 5
 docker run --name test-nginx --net test -v $TRAVIS_BUILD_DIR:/var/www -d -t test-nginx
 sleep 5
+docker exec test-php chmod -R 777 /var/www
 docker exec test-php composer install
 docker exec test-php cp .env.example .env
 docker exec test-php sed -i '/DB_HOST/c\DB_HOST=test-mysql' .env
