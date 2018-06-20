@@ -20,9 +20,9 @@ cp .env.example .env
 cp .docker/mysql/.env.example .docker/mysql/.env
 ```
 
-4. Make copy of php docker .env.example to .env:
+4. Build docker images
 ```bash
-cp .docker/php/.env.example .docker/php/.env
+docker-compose build
 ```
 
 5. Fill appropriate data into `.docker/mysql/.env` and `.env`
