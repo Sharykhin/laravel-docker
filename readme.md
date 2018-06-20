@@ -38,7 +38,12 @@ docker-compose exec laravel-php composer install
 docker-compose exec laravel-php php artisan key:generate
 ```
 
-8. Run server:
+8. Apply migrations:
+```bash
+docker-compose exec laravel-php artisan migrate
+```
+
+9. Run server:
 ```bash
 docker-compose exec laravel-php php artisan serve
 ```
