@@ -21,7 +21,6 @@ docker exec test-php sed -i '/DB_DATABASE/c\DB_DATABASE=test' .env
 docker exec test-php sed -i '/DB_USERNAME/c\DB_USERNAME=test' .env
 docker exec test-php sed -i '/DB_PASSWORD/c\DB_PASSWORD=test' .env
 docker exec test-php php artisan key:generate
-#docker exec -t -i test-php sh -c 'php artisan migrate:test; exit $?'
 docker exec -it test-php php artisan migrate || exit 1
 docker exec -it test-php php artisan migrate:rollback || exit 1
 docker exec -it test-php php artisan migrate:fresh || exit 1
