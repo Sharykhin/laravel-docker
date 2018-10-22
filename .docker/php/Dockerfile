@@ -59,8 +59,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #
 COPY .docker/php/laravel.ini /usr/local/etc/php/conf.d
 
-USER  www-data
-
 WORKDIR /var/www
 
 CMD ["php-fpm"]

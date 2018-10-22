@@ -40,7 +40,6 @@ services:
         - laravel-php
       ports:
         - 8000:80
-        - 447:443
       networks:
         - laravel
   laravel-mysql:
@@ -65,6 +64,4 @@ services:
         - ALLOW_EMPTY_PASSWORD=yes
       volumes:
         - redis-data:/bitnami/redis/data
-      ports:
-        - 6379:6379
 
