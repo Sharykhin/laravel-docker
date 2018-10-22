@@ -5,8 +5,8 @@ networks:
     external: true
 
 volumes:
-  db-data:
-  #db-logs:
+  mysql-data:
+  redis-data:
 
 services:
   laravel-php:
@@ -51,12 +51,20 @@ services:
         dockerfile: .docker/mysql/Dockerfile
       volumes:
         - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-        - db-data:/var/lib/mysql
-        #- db-logs:/var/log/mysql
+        - mysql-data:/var/lib/mysql
       ports:
         - 33006:3306
       env_file:
         - ./.docker/mysql/.env
       networks:
         - laravel
+  laravel-redis:
+      container_name: laravel-redis
+      image: bitnami/redis:4.0
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+      volumes:
+        - redis-data:/bitnami/redis/data
+      ports:
+        - 6379:6379
 

@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/foo', [
-    'uses' => 'TestController@index'
+Route::get('/healthcheck', [
+    'uses' => 'CommonController@healthcheck'
 ]);
+
+Route::get('/phpinfo', function () {
+    phpinfo();die;
+});
