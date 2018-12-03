@@ -3,11 +3,11 @@
 # Image Setup
 #--------------------------------------------------------------------------
 #
-FROM php:7.2-fpm-alpine
+FROM php:7.2-fpm
 
-RUN apk update \
-    && apk add  --no-cache git mysql-client curl libmcrypt libmcrypt-dev openssh-client icu-dev \
-    libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf bash
+RUN apt-get update \
+    && apt-get install -y git mysql-client curl openssh-client \
+    libxml2-dev libpng-dev g++ make autoconf bash
 
 #
 #--------------------------------------------------------------------------
